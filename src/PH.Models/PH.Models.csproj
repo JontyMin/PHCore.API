@@ -8,5 +8,8 @@
     <ProjectReference Include="..\PH.Component.Jwt\PH.Component.Jwt.csproj" />
     <ProjectReference Include="..\PH.DbContexts\PH.DbContexts.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+  </ItemGroup>
 
 </Project>

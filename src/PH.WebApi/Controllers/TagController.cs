@@ -9,14 +9,33 @@ namespace PH.WebApi.Controllers
 {
     using WebCore.Core;
     using Models.ViewModel;
+    using Services;
+
     [Route("[controller]")]
     [ApiController]
     public class TagController : ControllerBase
     {
+        private readonly ITagService _tagService;
+
+        public TagController(ITagService tagService)
+        {
+            _tagService = tagService;
+        }
         [HttpPost]
         public async Task<ExecuteResult> Post(TagViewModel tagViewModel)
         {
-            return new ExecuteResult();
+            return await _tagService.Create(tagViewModel);
+        }
+        [HttpPut]
+        public async Task<ExecuteResult> Put(TagViewModel viewModel)
+        {
+            return await _tagService.Update(viewModel);
+        }
+
+        [HttpDelete]
+        public async Task<ExecuteResult> Delete(long id)
+        {
+            return await _tagService.Delete(new TagViewModel { Id = id });
         }
     }
 }

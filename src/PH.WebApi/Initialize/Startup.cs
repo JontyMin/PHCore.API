@@ -17,6 +17,8 @@ namespace PH.WebApi
     using DbContexts;
     using UnitOfWork;
     using WebCore;
+    using Models.Automapper;
+    using Services;
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -37,6 +39,13 @@ namespace PH.WebApi
             services.AddWebCoreService(Configuration);
 
             services.AddUnitOfWorkService<PHDbContext>(options => { options.UseSqlServer(Configuration.GetSection("ConnectionStrings:PHDbContext").Value); });
+
+            //注册automapper服务
+            services.AddAutomapperService();
+
+            //注册IBaseService和IRoleService接口及对应的实现类
+            services.AddScoped<IBaseService, BaseService>();
+            services.AddScoped<ITagService, TagService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
