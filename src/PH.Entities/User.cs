@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PH.Entities
+﻿namespace PH.Entities
 {
-    using Core;
-    public class User
+    using Entities.Core;
+    /// <summary>
+    /// 用户表
+    /// </summary>
+    public class User:BaseEntity
     {
         /// <summary>
         /// 账号

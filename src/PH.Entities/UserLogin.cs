@@ -3,6 +3,9 @@
 namespace PH.Entities
 {
     using Entities.Core;
+    /// <summary>
+    /// 用户登录表
+    /// </summary>
     public class UserLogin:IEntity
     {
         /// <summary>

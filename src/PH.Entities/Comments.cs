@@ -4,12 +4,8 @@
     /// <summary>
     /// 评论表
     /// </summary>
-    public class Comments:IEntity
+    public class Comments:BaseEntity
     {
-        /// <summary>
-        /// 评论id
-        /// </summary>
-        public long ComId { get; set; }
         /// <summary>
         /// 发表用户Id
         /// </summary>

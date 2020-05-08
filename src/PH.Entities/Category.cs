@@ -4,12 +4,8 @@
     /// <summary>
     /// 分类表
     /// </summary>
-    public class Category:IEntity
+    public class Category:BaseEntity
     {
-        /// <summary>
-        /// 类型id
-        /// </summary>
-        public long CatId { get; set; }
         /// <summary>
         /// 类型名称
         /// </summary>

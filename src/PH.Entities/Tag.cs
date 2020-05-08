@@ -1,12 +1,12 @@
 ﻿namespace PH.Entities
 {
     using Entities.Core;
-    public class Tag:IEntity
+    /// <summary>
+    /// 标签表
+    /// </summary>
+    public class Tag:BaseEntity
     {
-        /// <summary>
-        /// 标签id
-        /// </summary>
-        public long Tid { get; set; }
+        
         /// <summary>
         /// 标签名
         /// </summary>

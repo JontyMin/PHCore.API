@@ -4,12 +4,8 @@
     /// <summary>
     /// 文章表
     /// </summary>
-    public class Article:IEntity
+    public class Article:BaseEntity
     {
-        /// <summary>
-        /// 文章id
-        /// </summary>
-        public long ArtId { get; set; }
         /// <summary>
         /// 用户id
         /// </summary>
@@ -34,5 +30,7 @@
         /// 点赞数
         /// </summary>
         public int ArtLikeCount { get; set; }
+
+        public User User { get; set; }
     }
 }
