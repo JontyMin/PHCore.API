@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -19,13 +20,35 @@ namespace PH.WebApi
     using WebCore;
     using Models.Automapper;
     using Services;
+    using Component.Aop;
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        //public Startup(IConfiguration configuration)
+        //{
+        //    Configuration = configuration;
+        //}
+        public ILifetimeScope AutofacContainer { get; private set; }
 
+        public Startup(IWebHostEnvironment env)
+        {
+            // In ASP.NET Core 3.0 `env` will be an IWebHostingEnvironment, not IHostingEnvironment.
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
+        }
+        //添加autofac的DI配置容器
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            //注册IBaseService和IRoleService接口及对应的实现类
+            /*builder.RegisterType<BaseService>().As<IBaseService>().InstancePerLifetimeScope();
+            builder.RegisterType<TagService>().As<ITagService>().InstancePerLifetimeScope();*/
+            //注册aop拦截器 
+            //将业务层程序集名称传了进去，给业务层接口和实现做了注册，也给业务层各方法开启了代理
+            builder.AddAopService(ServiceExtensions.GetAssemblyName());
+        }
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -44,8 +67,8 @@ namespace PH.WebApi
             services.AddAutomapperService();
 
             //注册IBaseService和IRoleService接口及对应的实现类
-            services.AddScoped<IBaseService, BaseService>();
-            services.AddScoped<ITagService, TagService>();
+            /*services.AddScoped<IBaseService, BaseService>();
+            services.AddScoped<ITagService, TagService>();*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
