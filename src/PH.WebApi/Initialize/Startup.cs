@@ -14,9 +14,9 @@ using Microsoft.Extensions.Logging;
 
 namespace PH.WebApi
 {
-    using PH.DbContexts;
-    using PH.UnitOfWork;
-
+    using DbContexts;
+    using UnitOfWork;
+    using WebCore;
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -30,6 +30,12 @@ namespace PH.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            //×¢²á¿çÓò²ßÂÔ
+            services.AddCorsPolicy(Configuration);
+            //×¢²áwebcore·þÎñ£¨ÍøÕ¾Ö÷ÒªÅäÖÃ£©
+            services.AddWebCoreService(Configuration);
+
             services.AddUnitOfWorkService<PHDbContext>(options => { options.UseSqlServer(Configuration.GetSection("ConnectionStrings:PHDbContext").Value); });
         }
 
@@ -42,6 +48,8 @@ namespace PH.WebApi
             }
 
             app.UseRouting();
+
+            app.UseCors(WebCoreExtensions.MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 
