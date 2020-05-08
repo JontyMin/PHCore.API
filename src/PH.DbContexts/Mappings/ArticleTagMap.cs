@@ -9,7 +9,7 @@ namespace PH.DbContexts.Mappings
         public void Configure(EntityTypeBuilder<ArticleTag> builder)
         {
             builder.ToTable("ArticleTag");
-            builder.HasKey(c => c.ArticleId);
+            builder.HasKey(c => c.Id);
             builder.Property(c => c.ArticleId).IsRequired();
             builder.Property(c => c.TagId).IsRequired();
             builder.HasOne(c => c.Article);

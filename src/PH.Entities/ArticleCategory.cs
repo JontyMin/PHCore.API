@@ -6,7 +6,7 @@ namespace PH.Entities
     /// <summary>
     /// 文章类型表
     /// </summary>
-    public class ArticleCategory:IEntity
+    public class ArticleCategory:BaseEntity
     {
         /// <summary>
         /// 文章id
@@ -17,8 +17,8 @@ namespace PH.Entities
         /// </summary>
         public long CategoryId { get; set; }
 
-        public IEnumerable<Article> Article { get; set; }
+        public Article Article { get; set; }
 
-        public IEnumerable<Category> Category { get; set; }
+        public Category Category { get; set; }
     }
 }

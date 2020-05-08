@@ -4,7 +4,7 @@
     /// <summary>
     /// 文章标签表
     /// </summary>
-    public class ArticleTag:IEntity
+    public class ArticleTag:BaseEntity
     {
         /// <summary>
         /// 文章id
@@ -16,7 +16,6 @@
         public long TagId { get; set;}
 
         public Article Article { get; set; }
-
         public Tag Tag { get; set; }
     }
 }

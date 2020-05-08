@@ -8,8 +8,8 @@ namespace PH.DbContexts.Mappings
     {
         public void Configure(EntityTypeBuilder<ArticleCategory> builder)
         {
-            builder.ToTable("ArticleTag");
-            builder.HasKey(c => c.ArticleId);
+            builder.ToTable("ArticleCategory");
+            builder.HasKey(c => c.Id);
             builder.Property(c => c.ArticleId).IsRequired();
             builder.Property(c => c.CategoryId).IsRequired();
             builder.HasOne(c => c.Article);
