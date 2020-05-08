@@ -21,27 +21,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.Bussiness", "6.Bussiness"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7.WebHost", "7.WebHost", "{9A891A8E-AB41-457D-9D16-1AC995F81D15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PH.Common", "src\PH.Common\PH.Common.csproj", "{4E32582A-D6D3-4E94-A10A-A163D54B5FB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PH.Common", "src\PH.Common\PH.Common.csproj", "{4E32582A-D6D3-4E94-A10A-A163D54B5FB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PH.Entities", "src\PH.Entities\PH.Entities.csproj", "{6B5DE2BC-8477-409E-9D5B-DF7DF0E141B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PH.Entities", "src\PH.Entities\PH.Entities.csproj", "{6B5DE2BC-8477-409E-9D5B-DF7DF0E141B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PH.WebCore", "src\PH.WebCore\PH.WebCore.csproj", "{54D03707-64CC-46AA-8524-2F9E50915485}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PH.WebCore", "src\PH.WebCore\PH.WebCore.csproj", "{54D03707-64CC-46AA-8524-2F9E50915485}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PH.UnitOfWork", "src\PH.UnitOfWork\PH.UnitOfWork.csproj", "{61F95552-292E-450C-9F64-F7048ED77C91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PH.UnitOfWork", "src\PH.UnitOfWork\PH.UnitOfWork.csproj", "{61F95552-292E-450C-9F64-F7048ED77C91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PH.DbContexts", "src\PH.DbContexts\PH.DbContexts.csproj", "{B9B8A5D5-0523-4D4A-8E54-F99B295CDD74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PH.DbContexts", "src\PH.DbContexts\PH.DbContexts.csproj", "{B9B8A5D5-0523-4D4A-8E54-F99B295CDD74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PH.Component.Aop", "src\PH.Component.Aop\PH.Component.Aop.csproj", "{9D64E206-52FB-4C96-954F-F2160DF50705}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PH.Component.Aop", "src\PH.Component.Aop\PH.Component.Aop.csproj", "{9D64E206-52FB-4C96-954F-F2160DF50705}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PH.Component.Jwt", "src\PH.Component.Jwt\PH.Component.Jwt.csproj", "{B7BDAE74-A413-411E-9CAD-A80C969D5D80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PH.Component.Jwt", "src\PH.Component.Jwt\PH.Component.Jwt.csproj", "{B7BDAE74-A413-411E-9CAD-A80C969D5D80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PH.Models", "src\PH.Models\PH.Models.csproj", "{0B219B81-144B-4B25-82FD-D34C8A7041D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PH.Models", "src\PH.Models\PH.Models.csproj", "{0B219B81-144B-4B25-82FD-D34C8A7041D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PH.Services", "src\PH.Services\PH.Services.csproj", "{0461BBD2-8EDA-4569-9761-720139EB9B53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PH.Services", "src\PH.Services\PH.Services.csproj", "{0461BBD2-8EDA-4569-9761-720139EB9B53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PH.WebApi", "src\PH.WebApi\PH.WebApi.csproj", "{517B4AD9-B837-4564-B7AE-952C3E64A75E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PH.WebApi", "src\PH.WebApi\PH.WebApi.csproj", "{517B4AD9-B837-4564-B7AE-952C3E64A75E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonTests", "tests\CommonTests\CommonTests.csproj", "{5601D86B-24D5-409F-B00C-9BCD67A6D284}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonTests", "tests\CommonTests\CommonTests.csproj", "{5601D86B-24D5-409F-B00C-9BCD67A6D284}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
