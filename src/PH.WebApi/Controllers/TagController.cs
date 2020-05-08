@@ -13,7 +13,7 @@ namespace PH.WebApi.Controllers
 
     [Route("[controller]")]
     [ApiController]
-    public class TagController : ControllerBase
+    public class TagController : AuthorizeController
     {
         private readonly ITagService _tagService;
 

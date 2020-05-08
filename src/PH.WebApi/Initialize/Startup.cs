@@ -21,6 +21,7 @@ namespace PH.WebApi
     using Models.Automapper;
     using Services;
     using Component.Aop;
+    using Component.Jwt;
     public class Startup
     {
         //public Startup(IConfiguration configuration)
@@ -66,6 +67,9 @@ namespace PH.WebApi
             //注册automapper服务
             services.AddAutomapperService();
 
+            //注册jwt服务
+            services.AddJwtService(Configuration);
+
             //注册IBaseService和IRoleService接口及对应的实现类
             /*services.AddScoped<IBaseService, BaseService>();
             services.AddScoped<ITagService, TagService>();*/
@@ -81,7 +85,11 @@ namespace PH.WebApi
 
             app.UseRouting();
 
+            //添加跨域
             app.UseCors(WebCoreExtensions.MyAllowSpecificOrigins);
+
+            //添加认证中间件
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
