@@ -1,10 +1,16 @@
+using System;
+using System.IO;
+using System.Reflection;
 using Autofac;
+using DocumentFormat.OpenXml.EMMA;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
 
 
 namespace PH.WebApi
@@ -18,6 +24,7 @@ namespace PH.WebApi
     using Component.Jwt;
     using Filters;
     using WebCore.MultiLanguages;
+
     public class Startup
     {
         //public Startup(IConfiguration configuration)
@@ -80,6 +87,18 @@ namespace PH.WebApi
             //注册IBaseService和IRoleService接口及对应的实现类
             /*services.AddScoped<IBaseService, BaseService>();
             services.AddScoped<ITagService, TagService>();*/
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "ProtectHeart API", Version = "v1" });
+                // 获取xml文件名
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                // 获取xml文件路径
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                // 添加控制器层注释，true表示显示控制器注释
+                options.IncludeXmlComments(xmlPath, true);
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,6 +121,14 @@ namespace PH.WebApi
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            //启用中间件服务生成Swagger作为JSON终结点
+            app.UseSwagger();
+            //启用中间件服务对swagger-ui，指定Swagger JSON终结点
+             app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Demo v1");
+    });
 
             app.UseEndpoints(endpoints =>
             {

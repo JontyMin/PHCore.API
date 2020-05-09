@@ -12,6 +12,10 @@ namespace PH.WebApi.Controllers
 {
     using Models.ViewModel;
     using Services.Account;
+
+    /// <summary>
+    /// 登录认证
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
     public class AccountController : AuthorizeController

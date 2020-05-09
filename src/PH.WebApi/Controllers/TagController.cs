@@ -21,17 +21,32 @@ namespace PH.WebApi.Controllers
         {
             _tagService = tagService;
         }
+
+        /// <summary>
+        /// 添加标签
+        /// </summary>
+        /// <param name="tagViewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ExecuteResult> Post(TagViewModel tagViewModel)
         {
             return await _tagService.Create(tagViewModel);
         }
+        /// <summary>
+        /// 修改标签
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<ExecuteResult> Put(TagViewModel viewModel)
         {
             return await _tagService.Update(viewModel);
         }
-
+        /// <summary>
+        /// 删除标签
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         public async Task<ExecuteResult> Delete(long id)
         {

@@ -4,7 +4,7 @@
   <Var name="OutPath" value=".\Obfuscator_Output" />
   <Var name="UseUnicodeNames" value="true" />
 
-  <Module file="$(InPath)\MS.Services.dll" />
-  <Module file="$(InPath)\MS.Component.Jwt.dll" />
-  <Module file="$(InPath)\MS.Component.Aop.dll" />
+  <Module file="$(InPath)\PH.Services.dll" />
+  <Module file="$(InPath)\PH.Component.Jwt.dll" />
+  <Module file="$(InPath)\PH.Component.Aop.dll" />
 </Obfuscator>

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PH.WebApi</name>
+    </assembly>
+    <members>
+        <member name="T:PH.WebApi.Controllers.AccountController">
+            <summary>
+            登录认证
+            </summary>
+        </member>
+        <member name="M:PH.WebApi.Controllers.TagController.Post(PH.Models.ViewModel.TagViewModel)">
+            <summary>
+            添加标签
+            </summary>
+            <param name="tagViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PH.WebApi.Controllers.TagController.Put(PH.Models.ViewModel.TagViewModel)">
+            <summary>
+            修改标签
+            </summary>
+            <param name="viewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PH.WebApi.Controllers.TagController.Delete(System.Int64)">
+            <summary>
+            删除标签
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:PH.WebApi.Filters.ApiExceptionFilter">
+            <summary>
+            api异常过滤器
+            </summary>
+        </member>
+        <member name="T:PH.WebApi.Filters.ApiResultFilter">
+            <summary>
+            给api返回结果包一层状态码
+            </summary>
+        </member>
+        <member name="M:PH.WebApi.Initialize.DBSeed.Initialize(PH.UnitOfWork.UnitOfWork.IUnitOfWork{PH.DbContexts.PHDbContext})">
+            <summary>
+            数据初始化
+            </summary>
+            <param name="unitOfWork"></param>
+            <returns>返回是否创建了数据库（非迁移）</returns>
+        </member>
+    </members>
+</doc>
