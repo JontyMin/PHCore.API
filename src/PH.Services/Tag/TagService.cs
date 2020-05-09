@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.Extensions.Localization;
 
 namespace PH.Services
 {
@@ -10,9 +11,10 @@ namespace PH.Services
     using Models.ViewModel;
     using UnitOfWork.UnitOfWork;
     using WebCore.Core;
+    using Component.Jwt.UserClaim;
     public class TagService:BaseService,ITagService
     {
-        public TagService(IUnitOfWork<PHDbContext> unitOfWork, IMapper mapper, IdWorker idWorker) : base(unitOfWork, mapper, idWorker)
+        public TagService(IUnitOfWork<PHDbContext> unitOfWork, IMapper mapper, IdWorker idWorker,IClaimsAccessor claimsAccessor, IStringLocalizer localizer) : base(unitOfWork, mapper, idWorker, claimsAccessor, localizer)
         {
         }
 
@@ -28,7 +30,7 @@ namespace PH.Services
             {
                 Tag newRow = _mapper.Map<Tag>(viewModel);
                 newRow.Id = _idWorker.NextId();//获取一个雪花Id
-                newRow.Creator = 1219490056771866624;//由于暂时还没有做登录，所以拿不到登录者信息，先随便写一个后面再完善
+                newRow.Creator = _claimsAccessor.UserId;//由于暂时还没有做登录，所以拿不到登录者信息，先随便写一个后面再完善
                 newRow.CreateTime = DateTime.Now;
                 _unitOfWork.GetRepository<Tag>().Insert(newRow);
                 await _unitOfWork.SaveChangesAsync();

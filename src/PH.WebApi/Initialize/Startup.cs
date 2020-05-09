@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 
 namespace PH.WebApi
@@ -22,6 +16,8 @@ namespace PH.WebApi
     using Services;
     using Component.Aop;
     using Component.Jwt;
+    using Filters;
+    using WebCore.MultiLanguages;
     public class Startup
     {
         //public Startup(IConfiguration configuration)
@@ -55,7 +51,18 @@ namespace PH.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            //添加多语言本地化支持
+            services.AddMultiLanguages();
+
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<ApiResultFilter>();
+                options.Filters.Add<ApiExceptionFilter>();
+            }).AddDataAnnotationsLocalization(options =>
+            {
+                options.DataAnnotationLocalizerProvider = (type, factory) =>
+                    factory.Create(typeof(SharedResource));//给注解添加本地化资源提供器Localizerprovider
+            });
 
             //注册跨域策略
             services.AddCorsPolicy(Configuration);
@@ -82,6 +89,9 @@ namespace PH.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //添加多语言本地化支持
+            app.UseMultiLanguage(Configuration);
 
             app.UseRouting();
 

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.Extensions.Localization;
 
 namespace PH.Models.ViewModel
 {
@@ -15,16 +16,16 @@ namespace PH.Models.ViewModel
     using WebCore.Core;
     public class LoginViewModel
     {
-        [Display(Name = "用户名")]
-        [Required(ErrorMessage = "{0}必填")]
-        [StringLength(16, ErrorMessage = "不能超过{0}个字符")]
-        [RegularExpression(@"^[a-zA-Z0-9_]{4,16}$", ErrorMessage = "只能包含字符、数字和下划线")]
+        [Display(Name = "LoginViewModel_DisplayName_Account")]
+        [Required(ErrorMessage = "DataAnnotations_ErrorMessage_Required")]
+        [StringLength(16, ErrorMessage = "DataAnnotations_ErrorMessage_StringLength")]
+        [RegularExpression(@"^[a-zA-Z0-9_]{4,16}$", ErrorMessage = "DataAnnotations_ErrorMessage_AccountRegular")]
         public string Account { get; set; }
-        [Display(Name = "密码")]
-        [Required(ErrorMessage = "{0}必填")]
+        [Display(Name = "LoginViewModel_DisplayName_Password")]
+        [Required(ErrorMessage = "DataAnnotations_ErrorMessage_Required")]
         public string Password { get; set; }
 
-        public async Task<ExecuteResult<UserData>> LoginValidate(IUnitOfWork<PHDbContext> unitOfWork, IMapper mapper, SiteSetting siteSetting)
+        public async Task<ExecuteResult<UserData>> LoginValidate(IUnitOfWork<PHDbContext> unitOfWork, IMapper mapper, SiteSetting siteSetting, IStringLocalizer localizer)
         {
             ExecuteResult<UserData> result = new ExecuteResult<UserData>();
             //将登录用户查出来
@@ -33,7 +34,7 @@ namespace PH.Models.ViewModel
             //用户不存在
             if (loginUserInDB is null)
             {
-                return result.SetFailMessage("用户不存在");
+                return result.SetFailMessage(localizer.GetString("DataAnnotations_ErrorMessage_NotExist", localizer.GetString("LoginViewModel_DisplayName_Account")));
             }
 
             //用户被锁定
@@ -41,7 +42,7 @@ namespace PH.Models.ViewModel
                 loginUserInDB.LockedTime.HasValue &&
                 (DateTime.Now - loginUserInDB.LockedTime.Value).Minutes < siteSetting.LoginLockedTimeout)
             {
-                return result.SetFailMessage(string.Format("用户已被锁定，请{0}分钟后再试！", siteSetting.LoginLockedTimeout.ToString()));
+                return result.SetFailMessage(localizer.GetString("LoginViewModel_ServiceError_UserLocked", siteSetting.LoginLockedTimeout));
             }
 
             //密码正确
@@ -54,7 +55,7 @@ namespace PH.Models.ViewModel
                 //如果用户已失效
                 if (userInDB.StatusCode != StatusCode.Enable)
                 {
-                    return result.SetFailMessage("用户已失效，请联系管理员！");
+                    return result.SetFailMessage(localizer.GetString("LoginViewModel_ServiceError_UserDisabled"));
                 }
 
                 //用户正常、密码正确，更新相应字段
@@ -72,13 +73,13 @@ namespace PH.Models.ViewModel
             else
             {
                 loginUserInDB.AccessFailedCount++;//失败次数累加
-                result.SetFailMessage("用户名或密码错误！");
+                result.SetFailMessage(localizer.GetString("LoginViewModel_ServiceError_LoginError"));
                 //超出失败次数限制
                 if (loginUserInDB.AccessFailedCount >= siteSetting.LoginFailedCountLimits)
                 {
                     loginUserInDB.IsLocked = true;
                     loginUserInDB.LockedTime = DateTime.Now;
-                    result.SetFailMessage(string.Format("用户已被锁定，请{0}分钟后再试！", siteSetting.LoginLockedTimeout.ToString()));
+                    result.SetFailMessage(localizer.GetString("LoginViewModel_ServiceError_UserLocked", siteSetting.LoginLockedTimeout));
                 }
                 //提交到数据库
                 await unitOfWork.SaveChangesAsync();
